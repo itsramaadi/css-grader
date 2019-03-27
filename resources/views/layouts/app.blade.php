@@ -15,7 +15,7 @@
     <!-- Fonts -->
     <link rel="dns-prefetch" href="//fonts.gstatic.com">
     <link href="https://fonts.googleapis.com/css?family=Nunito" rel="stylesheet" type="text/css">
-
+    <script defer src="https://use.fontawesome.com/releases/v5.8.1/js/all.js" integrity="sha384-g5uSoOSBd7KkhAMlnQILrecXvzst9TdC09/VM+pjDTCM+1il8RHz5fKANTFFb+gQ" crossorigin="anonymous"></script>
     <!-- Styles -->
     <link href="{{ asset('css/app.css') }}" rel="stylesheet">
 </head>
@@ -24,7 +24,7 @@
         <nav class="navbar navbar-expand-md navbar-light navbar-laravel">
             <div class="container">
                 <a class="navbar-brand" href="{{ url('/') }}">
-                    {{ config('app.name', 'Laravel') }}
+                  <img src="img/csslogo.png" width="40" height="30">  {{ config('app.name', 'Laravel') }}
                 </a>
                 <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="{{ __('Toggle navigation') }}">
                     <span class="navbar-toggler-icon"></span>
@@ -75,6 +75,21 @@
         <main class="py-4">
             @yield('content')
         </main>
+
+        <footer class="container" style="margin-bottom: 20px; ">
+            <div class="row">
+                <div class="col-2" style="margin-right: 10px; border-right: 1px solid rgba(0,0,0,.125)">
+                    <img src="img/csslogo.png" class="img-fluid">
+                </div>
+                <div class="col-9">
+                    <h3>CSS SMASTA GRADER</h3>
+                    <p>
+                        &copy; 2019 - Computer Science Smasta, All Rights Reserved. <br>
+                        Made with <i class="fas fa-heart"></i> using <i class="fab fa-laravel"></i>
+                    </p>
+                </div>
+            </div>
+        </footer>
     </div>
 </body>
 </html>

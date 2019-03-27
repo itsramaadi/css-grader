@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
+use Auth;
 
 class HomeController extends Controller
 {
@@ -23,6 +24,10 @@ class HomeController extends Controller
      */
     public function index()
     {
-        return view('home');
+        if(Auth::user()->role_lvl == 0){
+            abort(403, 'Untuk masuk, anda harus diverifikasi oleh pengurus CSS.');
+        }elseif(Auth::user()->role_lvl >= 1){
+            return view('home');
+        }
     }
 }
