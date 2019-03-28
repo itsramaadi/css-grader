@@ -86,10 +86,11 @@
                     <div class="card-header">Dashboard khusus Pengurus</div>
     
                     <div class="card-body">
-                       <a href="" class="btn btn-success btn-lg">Buat Exercise</a>
-                       <a href="" class="btn btn-primary btn-lg">Review Submisi</a>
-                       <a href="" class="btn btn-primary btn-lg">Rekap Nilai</a>
-                       <a href="" class="btn btn-danger btn-lg">Tutup Exercise</a>
+                       <a href="/pengurus/buat-latihan" class="btn btn-success btn-lg">Buat Latihan</a>
+                       <a href="/pengurus/review-submisi" class="btn btn-primary btn-lg">Review Submisi</a>
+                       <a href="/pengurus/rekap-nilai" class="btn btn-info btn-lg">Rekap Nilai</a>
+                       <a href="/pengurus/tutup-latihan" class="btn btn-danger btn-lg">Tutup Latihan</a>
+                       <a href="/pengurus/arsip-latihan" class="btn btn-info btn-lg">Arsip latihan</a>
                     </div>
                 </div>
             </div>
@@ -98,7 +99,7 @@
     <div class="mt-2 row justify-content-center">
             <div class="col-md-8">
                 <div class="card">
-                    <div class="card-header">Kursus yang belum selesai</div>
+                    <div class="card-header">Latihan yang belum selesai</div>
     
                     <div class="card-body">
                       

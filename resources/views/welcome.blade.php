@@ -89,7 +89,7 @@
             <div class="content">
                 <div class="title m-b-md">
                     <img src="img/csslogo.png" height="250" width="400" alt=""> <br>
-                    CSS SMASTA
+                    CSS SMASTA-X
                 </div>
 
                 <div class="infobar">

@@ -75,21 +75,7 @@
         <main class="py-4">
             @yield('content')
         </main>
-
-        <footer class="container" style="margin-bottom: 20px; ">
-            <div class="row">
-                <div class="col-2" style="margin-right: 10px; border-right: 1px solid rgba(0,0,0,.125)">
-                    <img src="img/csslogo.png" class="img-fluid">
-                </div>
-                <div class="col-9">
-                    <h3>CSS SMASTA GRADER</h3>
-                    <p>
-                        &copy; 2019 - Computer Science Smasta, All Rights Reserved. <br>
-                        Made with <i class="fas fa-heart"></i> using <i class="fab fa-laravel"></i>
-                    </p>
-                </div>
-            </div>
-        </footer>
     </div>
+    
 </body>
 </html>
