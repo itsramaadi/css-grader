@@ -18,3 +18,11 @@ Route::get('/', function () {
 Auth::routes();
 
 Route::get('/home', 'HomeController@index')->name('home');
+
+Route::middleware(['auth'])->group(function(){
+    Route::get('/pengurus/buat-latihan', 'LatihanCrudController@create');
+    Route::post('/pengurus/buat-latihan', 'LatihanCrudController@store');
+
+    // Latihan woo!
+    Route::get('/home/latihan/{id}', 'LatihanCrudController@individual_task');
+});

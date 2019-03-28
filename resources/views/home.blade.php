@@ -10,7 +10,7 @@
                 <div class="card-body">
                     @if (session('status'))
                         <div class="alert alert-success" role="alert">
-                            {{ session('status') }}
+                            {!! session('status') !!}
                         </div>
                     @endif
                     <div class="row">
@@ -102,7 +102,15 @@
                     <div class="card-header">Latihan yang belum selesai</div>
     
                     <div class="card-body">
-                      
+                        <ul class="list-group">
+                            @foreach ($tugas_belum as $i)
+                                <li class="list-group-item d-flex justify-content-between align-items-center">
+                                        {{$i->course_name}}
+                                    <a href="home/latihan/{{$i->id}}" class="badge badge-primary badge-pill">Klik! ></a>
+                                </li>
+                            @endforeach
+                                   
+                        </ul>
                     </div>
                 </div>
             </div>
