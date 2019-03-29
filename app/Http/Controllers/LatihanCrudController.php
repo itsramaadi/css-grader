@@ -34,7 +34,9 @@ class LatihanCrudController extends Controller
         return Redirect('/home')->with('status', '<b>Sukses!</b> Latihan sudah dibuat!');
     }
 
-    public function individual_task(){
-        
+    public function individual_task(Request $request, $id){
+        $i_task_course = Course::find($id);
+        return view('see_course')->with('course', $i_task_course);
+        //dd($i_task_course);
     }
 }
