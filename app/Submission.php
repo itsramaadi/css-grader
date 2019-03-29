@@ -6,13 +6,11 @@ use Illuminate\Database\Eloquent\Model;
 
 class Submission extends Model
 {
-    // One-To-Many Courses
     public function courses(){
-        return $this->hasMany('App\Course');
+        return $this->belongsTo('App\Course','course_id');
     }
 
-    // One-To-Many Users
     public function users(){
-        return $this->hasMany('App\User');
+        return $this->belongsTo('App\User', 'user_id');
     }
 }

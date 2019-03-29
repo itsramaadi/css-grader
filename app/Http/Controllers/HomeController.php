@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 use Auth;
 use App\Course;
+use App\Submission;
 
 class HomeController extends Controller
 {
@@ -28,9 +29,14 @@ class HomeController extends Controller
         if(Auth::user()->role_lvl == 0){
             abort(403, 'Untuk masuk, anda harus diverifikasi oleh pengurus CSS.');
         }elseif(Auth::user()->role_lvl >= 1){
-            $belum_selesai = Course::where('course_archived', false)->get();
-            return view('home')->with('tugas_belum', $belum_selesai);
-            //dd($belum_selesai);
+            $pendingsub = Submission::where('status', false)->where('user_id', Auth::user()->id)->get();
+            $task = Course::where('course_archived', false)->get();
+            $mysubmission = Submission::where('user_id', Auth::user()->id)->where('status', true)->get();
+            $score = 0;
+            foreach($mysubmission as $ms){
+                $score = $score + $ms->score_achieved;
+            }
+            return view('home')->with('task', $task)->with('pendingsub', $pendingsub)->with('score', $score)->with('reviewed', $mysubmission);
         }
     }
 }

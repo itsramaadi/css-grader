@@ -44,7 +44,7 @@
                                             </tr>
                                             <tr>
                                                 <th scope="row">Skor</th>
-                                                <td>{{Auth::user()->score}}</td>
+                                                <td>{{$score}}</td>
                                             </tr>
                                             <tr>
                                                 <th scope="row">Absen Kelas</th>
@@ -69,7 +69,7 @@
                                                 </td>
                                             </tr>
                                         </tbody>
-                                      </table>
+                                </table>
 
                         </div>
                     </div>
@@ -80,40 +80,72 @@
     </div>
 
     @if(Auth::user()->role_lvl == 2)
-    <div class="mt-2 row justify-content-center">
+    <div class="row justify-content-center">
             <div class="col-md-8">
-                <div class="card">
-                    <div class="card-header">Dashboard khusus Pengurus</div>
-    
-                    <div class="card-body">
-                       <a href="/pengurus/buat-latihan" class="btn btn-success btn-lg">Buat Latihan</a>
-                       <a href="/pengurus/review-submisi" class="btn btn-primary btn-lg">Review Submisi</a>
-                       <a href="/pengurus/rekap-nilai" class="btn btn-info btn-lg">Rekap Nilai</a>
-                       <a href="/pengurus/tutup-latihan" class="btn btn-danger btn-lg">Tutup Latihan</a>
-                       <a href="/pengurus/arsip-latihan" class="btn btn-info btn-lg">Arsip latihan</a>
+                    <div class="card mt-2">
+                            <div class="card-header">Dashboard khusus Pengurus</div>
+                
+                            <div class="card-body">
+                               <a href="/pengurus/buat-latihan" class="btn btn-success btn-lg">Buat Latihan</a>
+                               <a href="/pengurus/review-submisi" class="btn btn-primary btn-lg">Review Submisi</a>
+                               <a href="/pengurus/rekap-nilai" class="btn btn-info btn-lg">Rekap Nilai</a>
+                               <a href="/pengurus/tutup-latihan" class="btn btn-danger btn-lg">Tutup Latihan</a>
+                               <a href="/pengurus/arsip-latihan" class="btn btn-info btn-lg">Arsip latihan</a>
+                            </div>
                     </div>
-                </div>
             </div>
-        </div>
-    @endif
-    <div class="mt-2 row justify-content-center">
+    </div>
+   
+    @endif 
+
+    <div class="row justify-content-center">
             <div class="col-md-8">
-                <div class="card">
-                    <div class="card-header">Latihan yang belum selesai</div>
-    
-                    <div class="card-body">
-                        <ul class="list-group">
-                            @foreach ($tugas_belum as $i)
-                                <li class="list-group-item d-flex justify-content-between align-items-center">
-                                        {{$i->course_name}}
-                                    <a href="home/latihan/{{$i->id}}" class="badge badge-primary badge-pill">Klik! ></a>
-                                </li>
-                            @endforeach
-                                   
-                        </ul>
+                    <div class="card mt-2">
+                            <div class="card-header">Tugas yang sudah review</div>
+                
+                            <div class="card-body">
+
+                                <div class="list-group">
+                                    @foreach ($reviewed as $rw)
+                                        <a href="/home/review/{{$rw->id}}" class="list-group-item list-group-item-action">{{ $rw->courses->course_name }}</a>
+                                    @endforeach
+                                </div>
+                            </div>
                     </div>
-                </div>
             </div>
-        </div>
+    </div>
+    <div class="row justify-content-center">
+            <div class="col-md-8">
+                    <div class="card mt-2">
+                            <div class="card-header">Semua tugas</div>
+                
+                            <div class="card-body">
+                                <div class="list-group">
+                                        @foreach ($task as $ts)
+                                            <a href="home/latihan/ {{$ts->id}}" class="list-group-item list-group-item-action">{{ $ts->course_name}}</a>
+                                        @endforeach
+                                </div>
+                            </div>
+                    </div>
+            </div>
+    </div>
+    <div class="row justify-content-center">
+            <div class="col-md-8">
+                    <div class="card mt-2">
+                            <div class="card-header">Tugas yang belum di review</div>
+                
+                            <div class="card-body">
+
+                                <div class="list-group">
+                                    @foreach ($pendingsub as $ps)
+                                        <a href="/home/review/{{$ps->id}}" class="list-group-item list-group-item-action">{{ $ps->courses->course_name }}</a>
+                                    @endforeach
+                                </div>
+                            </div>
+                    </div>
+            </div>
+    </div>
+
+
 </div>
 @endsection
