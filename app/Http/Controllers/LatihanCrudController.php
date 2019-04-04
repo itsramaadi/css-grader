@@ -44,10 +44,12 @@ class LatihanCrudController extends Controller
     }
 
     public function uvreview($id){
-        $submission = Submission::find($id);
+        @$submission = Submission::find($id);
         $reviewer;
         if($submission->status == true){
             $reviewer = User::find($submission->reviewer_id);
+        }else{
+            $reviewer = 'belum di review';
         }
         return view('review_user')->with('submission', $submission)->with('reviewer', $reviewer);
     }
@@ -74,5 +76,12 @@ class LatihanCrudController extends Controller
             'reviewer_id' => Auth::user()->id,
         ]);
         return redirect('/pengurus/review-submisi')->with('status', '<b>Sukses!</b> Sudah anda review!');
+    }
+
+    public function leaderboard(){
+         $leaderboard = Submission::selectRaw('user_id, sum(score_achieved) as pts')->groupBy('user_id')->orderBy('pts', 'desc')->get();
+         $user = User::orderBy('id', 'asc')->get();
+        return view('leaderboard')->with('leaderboard', $leaderboard)->with('user', $user);
+        //return $leaderboard;
     }
 }

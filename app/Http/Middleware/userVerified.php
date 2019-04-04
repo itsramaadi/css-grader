@@ -4,8 +4,7 @@ namespace App\Http\Middleware;
 
 use Closure;
 use Auth;
-
-class cekPengurus
+class userVerified
 {
     /**
      * Handle an incoming request.
@@ -16,8 +15,8 @@ class cekPengurus
      */
     public function handle($request, Closure $next)
     {
-        if(Auth::user()->role_lvl < 2 ){
-            abort(403, 'Lu bukan pengurus <i class="fas fa-dog"></i>');
+        if(Auth::user()->role_lvl < 1){
+            abort(403, 'Anda Belum diverifikasi oleh seorang pengurus. Jadi, anda belum bisa memakai fitur CSS X.');
         }else{
             return $next($request);
         }

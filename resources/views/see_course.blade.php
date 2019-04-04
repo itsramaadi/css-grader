@@ -17,7 +17,7 @@
                 <div class="mb-5">
                     {!! $course->description !!}
                 </div>
-                <div class="card">
+                <div class="card card-inactive">
                     <form action="" method="POST" style="margin:20px;" enctype="multipart/form-data">
                         @csrf
                         <label for="course_fileupload">Upload tugas anda</label> <br>
