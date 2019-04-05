@@ -6,7 +6,7 @@
         <div class="mr-4">
 
             <div class="avatar avatar-xl">
-                <img src="{{Auth::user()->avatar_url}}" alt="..." class="avatar-img rounded-circle">
+            <img src="{{$avatar_url}}" alt="..." class="avatar-img rounded-circle">
             </div>
         </div>
         <div class="p-2">
@@ -21,7 +21,7 @@
             </h1>
             @if (Auth::user()->role_lvl == 2)
                 <a href="/pengurus/home">Dasboard Pengurus</a> |
-            @endif <a href="/profile/{{Auth::user()->id}}">Laman publik mu</a> | <a href="#">Edit profil</a> | <a href="/home/cari-anggota">Cari anggota CSS</a>
+            @endif <a href="/profile/{{Auth::user()->id}}">Laman publik mu</a> | <a href="/home/edit-profile">Edit profil</a> | <a href="/home/cari-anggota">Cari anggota CSS</a>
         </div>
     </div>
     <hr>

@@ -55,7 +55,7 @@ class LatihanCrudController extends Controller
     }
 
     public function review(){
-        $all_notclosed = Submission::where('status', false)->get();
+        $all_notclosed = Submission::where('status', false)->orderBy('course_id', 'asc')->orderBy('created_at', 'asc')->get();
         return view('pengurus.latihan.review_latihan')->with('submission', $all_notclosed);
     }
 
@@ -76,12 +76,5 @@ class LatihanCrudController extends Controller
             'reviewer_id' => Auth::user()->id,
         ]);
         return redirect('/pengurus/review-submisi')->with('status', '<b>Sukses!</b> Sudah anda review!');
-    }
-
-    public function leaderboard(){
-         $leaderboard = Submission::selectRaw('user_id, sum(score_achieved) as pts')->groupBy('user_id')->orderBy('pts', 'desc')->get();
-         $user = User::orderBy('id', 'asc')->get();
-        return view('leaderboard')->with('leaderboard', $leaderboard)->with('user', $user);
-        //return $leaderboard;
     }
 }

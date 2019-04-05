@@ -12,6 +12,7 @@
                     Nama File: {{$submission->file_name}} <br>
                     Tugas: {{$submission->courses->course_name}} <br>
                     Maks Poin: {{$submission->courses->max_score}} poin <br>
+                    Waktu upload: {{$submission->created_at}}
                 </p>
                 <hr>
                 <div class="card">

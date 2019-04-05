@@ -152,8 +152,8 @@
                             <label for="class">Kelas</label>
                 
                         <!-- Input -->
-                        <input placeholder="contoh: X-MIPA-9" id="class" type="text" class="form-control{{ $errors->has('class') ? ' is-invalid' : '' }}" name="class" value="{{ old('class') }}" required>
-    
+                        <input placeholder="(X/XI/XII)-(MIPA/IPS)-(1-9)" id="class" type="text" class="classin form-control{{ $errors->has('class') ? ' is-invalid' : '' }}" name="class" value="{{ old('class') }}" required>
+                        
                         @if ($errors->has('class'))
                             <span class="invalid-feedback" role="alert">
                                 <strong>{{ $errors->first('class') }}</strong>
@@ -199,11 +199,17 @@
 
 
 
-
+<script src="{{ asset('js/mask.js')}}"></script>
 <script src="{{ asset('js/bootstrap.js') }}"></script>
 <script src="{{ asset('js/select2.js') }}"></script>
 <script src="{{ asset('js/flatpickr.js') }}"></script>
 <script src="{{ asset('js/list.js') }}"></script>
 <script src="{{ asset('js/theme.js') }}"></script>
+<script>
+$('.classin').mask('XOO-SSSO-9', 
+    {'translation': 
+        { 'O': {pattern:  /[a-zA-Z]/, optional: true}}
+    });
+</script>
 </body>
 </html>

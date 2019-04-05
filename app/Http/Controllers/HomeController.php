@@ -33,10 +33,22 @@ class HomeController extends Controller
             $task = Course::where('course_archived', false)->get();
             $mysubmission = Submission::where('user_id', Auth::user()->id)->where('status', true)->get();
             $score = 0;
+            $avatar;
+            if(Auth::user()->avatar_url == '/img/noavatar.png'){
+                $avatar = asset('/img/noavatar.png');
+            }else{
+                $avatar = asset('/storage/useravatar/' . Auth::user()->avatar_url);
+            }
+
             foreach($mysubmission as $ms){
                 $score = $score + $ms->score_achieved;
             }
-            return view('home')->with('task', $task)->with('pendingsub', $pendingsub)->with('score', $score)->with('reviewed', $mysubmission);
+            return view('home')->with('task', $task)->with([
+                'pendingsub' => $pendingsub,
+                'score' => $score,
+                'reviewed' => $mysubmission,
+                'avatar_url' => $avatar
+            ]);
         }
     }
 }
