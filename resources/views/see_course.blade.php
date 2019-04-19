@@ -21,7 +21,7 @@
                     <form action="" method="POST" style="margin:20px;" enctype="multipart/form-data">
                         @csrf
                         <label for="course_fileupload">Upload tugas anda</label> <br>
-                        <input  type="file" name="course_file" id="course_fileupload" accept=".html"> <br><br>
+                        <input  type="file" name="course_file" id="course_fileupload" accept=".html,.jpg,.jpeg,.png"> <br><br>
                         <button type="submit" class="btn btn-success">Upload tugas!</button>
                     </form>
                 </div>

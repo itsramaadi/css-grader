@@ -34,13 +34,16 @@ class LatihanCrudController extends Controller
     }
 
     public function individual_task(Request $request, $id){
-        $i_task_course = Course::find($id);
-        if(@$i_task_course->submissions[0]->user_id == @Auth::user()->id){
-            return redirect('/home')->with('status', '<b>Info:</b> Sudah kamu kerjakan. Lihat review di tab belum di review');
+        $taskcount = Submission::where('course_id', $id)->where('user_id', Auth::user()->id)->get();
+        $task_info = Course::find($id);
+        if(@$taskcount->count() > 0){
+            return redirect('/home')->with('status', '<b>Info:</b> Sudah kamu kerjakan. Lihat review di tab belum di review. atau bila sudah di review, akan muncul disamping.');
+        }elseif($task_info->course_archived == true){
+            return redirect('/home')->with('status', '<b>Info:</b> Maaf, tugas ini sudah ditutup. Sayang sekali, anda tidak bisa submisi lagi!');
         }else{
-            return view('see_course')->with('course', $i_task_course);
+            return view('see_course')->with('course', $task_info);
         }
-        //dd($i_task_course);
+       //return $i_task_course;
     }
 
     public function uvreview($id){

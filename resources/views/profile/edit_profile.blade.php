@@ -1,5 +1,27 @@
 @extends('layouts.app')
-
+@section('stylesheet')
+    <style>
+    .btn-file {
+    position: relative;
+    overflow: hidden;
+}
+.btn-file input[type=file] {
+    position: absolute;
+    top: 0;
+    right: 0;
+    min-width: 100%;
+    min-height: 100%;
+    font-size: 100px;
+    text-align: right;
+    filter: alpha(opacity=0);
+    opacity: 0;
+    outline: none;
+    background: white;
+    cursor: inherit;
+    display: block;
+}
+    </style>
+@endsection
 @section('content')
     <div class="container">
         <h1>Edit Profil</h1>
@@ -47,7 +69,7 @@
                     </div>
                     <div class="form-group">
                         <label>Gender</label> <br>
-                        <small class="text-muted">Untuk mencegah lucinta luna kedua, mintalah pengurus untuk mengubah gender anda di database.</small>
+                        <small class="text-muted">Lu ganti kelamin? Kalau iya, mintalah pengurus untuk mengubah gender anda di database.</small>
                     </div>
                     <div class="form-group">
                         <label id="form-avatar">Avatar</label>
@@ -57,7 +79,24 @@
                             <li>Berformat: PNG, JPG, dan GIF :O</li>
                             <li>Bukan pengendali empat elemen (Air, Angin, Api, Udara)</li>
                         </ol>
-                        <input accept=".jpg,.jpeg,.png,.gif" type="file" name="avatar" id="form-avatar">
+                        <label for="" class="btn btn-file btn-primary">
+                            <i class="fas fa-upload"></i> Pilih Avatar <input accept=".jpg,.jpeg,.png,.gif" type="file" name="avatar" id="form-avatar">
+                        </label>
+                    </div>
+
+                    <div class="form-group">
+                        <label id="form-cover">Sampul</label>
+                        <p>Ketentuan Sampul:</p>
+                        <ol>
+                            <li>Ukuran maksimal 8MB</li>
+                            <li>Berformat: PNG, JPG, dan GIF :O</li>
+                            <li>Bukan pengendali empat elemen (Air, Angin, Api, Udara)</li>
+                            <li>Sangat disarankan berukuran 1440 x 300, selain itu ntar gak bagus. silahkan atur dengan image editor kesayangan anda</li>
+                            <li><s>Jokes ricardo milos dilarang</s></li>
+                        </ol>
+                        <label for="" class="btn btn-file btn-primary">
+                        <i class="fas fa-upload"></i> Pilih sampul<input accept=".jpg,.jpeg,.png,.gif" type="file" name="cover" id="form-cover">
+                        </label>
                     </div>
 
                     <button type="submit" class="btn btn-success">Selesai</button>

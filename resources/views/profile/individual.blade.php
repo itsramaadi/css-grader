@@ -5,9 +5,11 @@
 
 
     <div class="header">
-
-        <img src="https://dashkit.goodthemes.co/assets/img/covers/profile-cover-1.jpg" class="header-img-top" alt="...">
-
+        @if ($profile->cover_img == "/img/mountains.png")
+            <img src="{{asset('/img/mountains.png')}}" class="header-img-top" alt="sepertinya {{$profile->name}} belum mengganti sampul gambarnya">
+        @else
+            
+        @endif
         <div class="container-fluid">
 
             <div class="header-body mt-n5 mt-md-n6">
@@ -15,8 +17,13 @@
                     <div class="col-auto">
 
                         <div class="avatar avatar-xxl header-avatar-top">
-                            <img src="{{asset($profile->avatar_url)}}" alt="..."
+                            @if ($profile->avatar_url == "/img/noavatar.png")
+                                <img src="{{asset($profile->avatar_url)}}" alt="..."
                                 class="avatar-img rounded-circle border border-4 border-card">
+                            @else
+                            <img src="{{asset('/storage/useravatar/'.$profile->avatar_url)}}" alt="..."
+                            class="avatar-img rounded-circle border border-4 border-card">
+                            @endif
                         </div>
 
                     </div>
@@ -51,7 +58,7 @@
                                 </a>
                             </li>
                             <li class="nav-item">
-                                <a href="profile-projects.html" class="nav-link">
+                            <a href="/home/anggota/{{$profile->id}}/uploaded" class="nav-link">
                                     File di upload
                                 </a>
                             </li>
@@ -62,7 +69,59 @@
         </div>
     </div>
 
-    <h3>Disinilah nanti Featured page mu diperlihatkan, coming soon!</h3>
+    <div class="card-deck mb-3">
+        <div class="card">
+            <div class="card-body">
+                <div class="row align-items-center">
+                    <div class="col">
+                        <h6 class="card-title text-uppercase text-muted mb-2">
+                            <i class="fas fa-star"></i> Skor
+                        </h6>
+                        <span class="h2 mb-0">
+                            {{$score}}
+                            <div class="mb-3"></div>
+                        </span>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="card">
+            <div class="card-body">
+                <div class="row align-items-center">
+                    <div class="col">
+                        <h6 class="card-title text-uppercase text-muted mb-2">
+                            <i class="fas fa-chart-line"></i> Peringkat
+                        </h6>
+                        <span class="h2 mb-0">
+                            <a href="/home/leaderboard?hl={{ $profile->id }}#user:{{str_replace(' ', '', $profile->name)}}-{{$profile->id}}">Lihat di leaderboard!</a>
+                            <div class="mb-3"></div>
+                        </span>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="card">
+            <div class="card-body">
+                <div class="row align-items-center">
+                    <div class="col">
+                        <h6 class="card-title text-uppercase text-muted mb-2">
+                            <i class="fas fa-check-double"></i> Tugas Dikerjakan
+                        </h6>
+                        <span class="h2 mb-0">
+                           {{$sub_done}}
+                            <div class="mb-3"></div>
+                        </span>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="card">
+        <div class="card-body" style="padding: 5px;">
+                <iframe width="100%" height="800px" src="/example/featured.html/{{$profile->id}}" frameborder="0"></iframe>
+        </div>
+    </div>
 
 
 

@@ -1,5 +1,24 @@
 @extends('layouts.app')
-
+@section('stylesheet')
+    <style>
+        .bestperingkat{
+            background-color: #E63757;
+            color: #FFFF;
+        }
+        .bestperingkat td{
+            background-color: #12263F;
+            color: #FFFF;
+        }
+        .hl{
+            background-color: #E63757;
+            color: #FFFF;
+        }
+        .hl td{
+            background-color: #E63757;
+            color: #FFFF;
+        }
+    </style>
+@endsection
 @section('content')
     <div class="container">
         <div class="card">
@@ -22,6 +41,8 @@
                       Leaderboard
             </div>
             <div class="card-body">
+                <p><i class="fas fa-check"></i> = Mendapatkan Hadiah</p>
+                <p><i class="fas fa-arrow-circle-right"></i> = Penunjuk</p>
                     <table class="table">
                             <thead>
                               <tr>
@@ -33,11 +54,40 @@
                             <tbody>
             
                             @foreach ($leaderboard as $lb)
-                                    <tr>
-                                        <td>{{$loop->iteration}}</td>
-                                        <td>{{$user[( ($lb->user_id) - 1)]->name}}</td>
-                                        <td>{{$lb->pts}}</td>
-                                    </tr>
+                                   @if ($loop->iteration <= 3)
+                                        @if ($hl == $lb->user_id)
+                                            <tr class="hl" id="user:{{str_replace(' ', '', $user[( ($lb->user_id) - 1)]->name)}}-{{$user[( ($lb->user_id) - 1)]->id}}">
+                                                <td>{{$loop->iteration}}</td>
+                                                <td><i class="fas fa-check"></i> {{$user[( ($lb->user_id) - 1)]->name}}</td>
+                                                <td>{{$lb->pts}}</td>
+                                            </tr>
+                                            @else
+                                            <tr class="bestperingkat" id="user:{{str_replace(' ', '', $user[( ($lb->user_id) - 1)]->name)}}-{{$user[( ($lb->user_id) - 1)]->id}}">
+                                                <td>{{$loop->iteration}}</td>
+                                                <td><i class="fas fa-check"></i> {{$user[( ($lb->user_id) - 1)]->name}}</td>
+                                                <td>{{$lb->pts}}</td>
+                                            </tr>
+                                        @endif
+                                        @else
+                                            @if ($hl == $lb->user_id)
+                                                <tr class="hl" id="user:{{str_replace(' ', '', $user[( ($lb->user_id) - 1)]->name)}}-{{$user[( ($lb->user_id) - 1)]->id}}">
+                                                    <td>{{$loop->iteration}}</td>
+                                                    <td><i class="fas fa-arrow-circle-right"></i> {{$user[( ($lb->user_id) - 1)]->name}}</td>
+                                                    <td>{{$lb->pts}}</td>
+                                                </tr>
+                                            @else
+                                            <tr id="user:{{str_replace(' ', '', $user[( ($lb->user_id) - 1)]->name)}}-{{$user[( ($lb->user_id) - 1)]->id}}">
+                                                <td>{{$loop->iteration}}</td>
+                                                <td>{{$user[( ($lb->user_id) - 1)]->name}}</td>
+                                                <td>{{$lb->pts}}</td>
+                                            </tr>
+                                            @endif
+                                        <tr id="user:{{str_replace(' ', '', $user[( ($lb->user_id) - 1)]->name)}}-{{$user[( ($lb->user_id) - 1)]->id}}">
+                                                <td>{{$loop->iteration}}</td>
+                                                <td>{{$user[( ($lb->user_id) - 1)]->name}}</td>
+                                                <td>{{$lb->pts}}</td>
+                                        </tr>
+                                   @endif
                             @endforeach
                         </tbody>
                     </table>

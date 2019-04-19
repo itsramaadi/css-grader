@@ -21,7 +21,7 @@
             </h1>
             @if (Auth::user()->role_lvl == 2)
                 <a href="/pengurus/home">Dasboard Pengurus</a> |
-            @endif <a href="/profile/{{Auth::user()->id}}">Laman publik mu</a> | <a href="/home/edit-profile">Edit profil</a> | <a href="/home/cari-anggota">Cari anggota CSS</a>
+            @endif <a href="/home/anggota/{{Auth::user()->id}}">Laman publik mu</a> | <a href="/home/edit-profile">Edit profil</a> | <a href="/home/cari-anggota">Cari anggota CSS</a>
         </div>
     </div>
     <hr>
@@ -38,7 +38,6 @@
             <span aria-hidden="true">&times;</span>
         </button>
     </div>
-
     <div class="row">
         <div class="mb-3 col-md-6 col-xs-12">
             <div class="card-deck">
@@ -67,7 +66,7 @@
                                     <i class="fas fa-chart-line"></i> Peringkat
                                 </h6>
                                 <span class="h2 mb-0">
-                                    <a href="/home/leaderboard">Lihat di leaderboard!</a>
+                                <a href="/home/leaderboard?hl={{Auth::user()->id}}#user:{{str_replace(' ', '', Auth::user()->name)}}-{{Auth::user()->id}}">Lihat di leaderboard!</a>
                                 </span>
                             </div>
                         </div>
@@ -107,7 +106,7 @@
                                     <i class="fas fa-chart-line"></i> Tugas dikerjakan
                                 </h6>
                                 <span class="h2 mb-0">
-                                    0
+                                    {{$done_proj}}
                                     <div class="mb-3"></div>
                                 </span>
                             </div>
@@ -123,7 +122,7 @@
                                     <i class="fas fa-chart-line"></i> Pending review
                                 </h6>
                                 <span class="h2 mb-0">
-                                    0
+                                    {{$pending_count}}
                                 </span>
                             </div>
                         </div>
@@ -138,7 +137,7 @@
                                     <i class="fas fa-chart-line"></i> Sudah di review
                                 </h6>
                                 <span class="h2 mb-0">
-                                    0
+                                    {{$reviewed_s}}
                                 </span>
                             </div>
                         </div>

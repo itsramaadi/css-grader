@@ -11,7 +11,8 @@
                       Rekap Poin
             </div>
             <div class="card-body">
-                    <table class="table">
+                <button onclick="exportxls()" class="mb-3 btn btn-success">Export ke excel</button>
+                    <table id="export" class="table">
                             <thead>
                               <tr>
                                 <th scope="col">#</th>
@@ -38,4 +39,17 @@
         </div>
 
     </div>
+@endsection
+@section('scripts')
+<script src="{{asset('js/exceltable.js')}}"></script>
+<script>
+    function exportxls(){
+        $("#export").table2excel({
+            exclude: ".noExl",
+            name: "REKAP",
+            fileext: ".xlsx",
+            filename: "RekapPoinCSS" //do not include extension
+        }); 
+    }
+</script>
 @endsection

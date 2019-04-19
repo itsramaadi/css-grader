@@ -18,7 +18,7 @@
     <script defer src="https://use.fontawesome.com/releases/v5.8.1/js/all.js" integrity="sha384-g5uSoOSBd7KkhAMlnQILrecXvzst9TdC09/VM+pjDTCM+1il8RHz5fKANTFFb+gQ" crossorigin="anonymous"></script>
     <!-- Styles -->
     @if (@session('themeMode') == 'dark')
-        <link href="{{ asset('css/app.css') }}" rel="stylesheet">
+        <link href="{{ asset('css/app.css?x') }}" rel="stylesheet">
     @else
         @if(@session('themeMode') == 'light')
             <link href="{{ asset('css/app-light.css') }}" rel="stylesheet">
@@ -41,14 +41,14 @@
     <div id="app">
         <nav class="navbar navbar-expand-md navbar-light navbar-laravel">
             <div class="container">
-                <a class="navbar-brand" href="{{ url('/') }}">
+                <a class="navbar-brand" href="{{ url('/home') }}">
                 @if (@session('themeMode') == 'dark')
-                    <img src="{{ asset('img/csslogo-white.png') }}" width="40" height="30">  {{ config('app.name', 'Laravel') }} <span class="badge badge-soft-warning">Beta</span>
+                    <img src="{{ asset('img/css-white.png') }}" width="40" height="30">  {{ config('app.name', 'Laravel') }} <span class="badge badge-soft-warning">Beta</span>
                     @else
                         @if(@session('themeMode') == 'light')
                             <img src="{{ asset('img/csslogo.png') }}" width="40" height="30">  {{ config('app.name', 'Laravel') }} <span class="badge badge-soft-warning">Beta</span>
                         @else
-                            <img src="{{ asset('img/csslogo-white.png') }}" width="40" height="30">  {{ config('app.name', 'Laravel') }} <span class="badge badge-soft-warning">Beta</span>
+                            <img src="{{ asset('img/css-white.png') }}" width="40" height="30">  {{ config('app.name', 'Laravel') }} <span class="badge badge-soft-warning">Beta</span>
                         @endif
                  @endif
                 </a>
@@ -89,11 +89,17 @@
                                 </a>
 
                                 <div class="dropdown-menu dropdown-menu-right" aria-labelledby="navbarDropdown">
-                                    <a class="dropdown-item" href="{{ route('logout') }}"
+                                    <a class="dropdown-item" href="{{ url('/home') }}">{{ __('Dashboard') }}
+                                    </a>
+                                    <a class="dropdown-item" href="{{ url('/home/edit-profile') }}">{{ __('Edit Profil') }}
+                                    </a>
+                                       <a class="dropdown-item" href="{{ route('logout') }}"
                                        onclick="event.preventDefault();
                                                      document.getElementById('logout-form').submit();">
                                         {{ __('Logout') }}
                                     </a>
+                                    
+                                    
 
                                     <form id="logout-form" action="{{ route('logout') }}" method="POST" style="display: none;">
                                         @csrf
@@ -140,6 +146,10 @@
 <script src="{{ asset('js/flatpickr.js') }}"></script>
 <script src="{{ asset('js/list.js') }}"></script>
 <script src="{{ asset('js/theme.js') }}"></script>
+<script>
+console.log('%c       ', 'font-size: 200px; background: url(https://i.vgy.me/RlwcVb.jpg) no-repeat; background-size: 210px 220px;');
+console.warn('Gile \n GANTENGNYA Pembuat aplikasi ini :) \n kenalan yuk ;)');
+</script>
 @yield('scripts')
 </body>
 </html>

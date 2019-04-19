@@ -14,10 +14,9 @@ class AddExtrasToUsersTable extends Migration
     public function up()
     {
         Schema::table('users', function (Blueprint $table) {
-            $table->integer('score')->default(0);
             $table->integer('role_lvl')->default(0);
             $table->string('avatar_url')->default('/img/noavatar.png');
-            $table->string('class', 9);
+            $table->string('class', 12);
             $table->string('gender');
             $table->integer('css_number');
         });

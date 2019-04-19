@@ -31,7 +31,11 @@
                     <div class="row align-items-center">
                                 <div class="col-auto">
                                     <a href="/home/anggota/{{$user->id}}" class="avatar">
-                                        <img src="{{$user->avatar_url}}" alt="..." class="avatar-img rounded-circle">
+                                        @if ($user->avatar_url == '/img/noavatar.png')
+                                        <img src="{{asset('/img/noavatar.png')}}" alt="{{$user->name}} belum mengganti avatar" class="avatar-img rounded-circle">
+                                        @else
+                                        <img src="{{ asset('/storage/useravatar/'.$user->avatar_url)}}" alt="{{$user->name}} avatar" class="avatar-img rounded-circle">
+                                        @endif
                                     </a>
                                 </div>
                             <div class="col ml-n2">
@@ -49,6 +53,21 @@
                                         <span class="text-secondary">●</span> Anggota CSS
                                     @endif
                                 </p>
+                            <p class="mt-1">
+                                @if ($user->gender == 1)
+                                    <i class="fas fa-mars"></i>
+                                @else
+                                    @if ($user->gender == 2)
+                                        <i class="fas fa-venus"></i>
+                                    @else
+                                        <i class="fas fa-question"></i>
+                                    @endif
+                                @endif
+                                |
+                                Kelas: {{$user->class}} 
+                                | 
+                                Absen: {{$user->css_number}}
+                            </p>
 
                             </div>
                             <div class="col-auto">

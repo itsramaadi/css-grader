@@ -20,6 +20,9 @@ Auth::routes();
 Route::get('/home', 'HomeController@index')->name('home');
 
 Route::middleware(['auth', 'sudahjadimember'])->group(function(){
+
+    Route::get('/gdrive', 'PagesController@gdrivefol');
+
     Route::get('/home/review/{id}',     'LatihanCrudController@uvreview');
     Route::get('/home/edit-profile', 'PagesController@edit_profile');
 
@@ -27,20 +30,22 @@ Route::middleware(['auth', 'sudahjadimember'])->group(function(){
 
     // Route latihan
     Route::get('/home/latihan/{id}',    'LatihanCrudController@individual_task');
-    Route::get('/home/cari-anggota',    'pagesController@search_member');
+    Route::get('/home/cari-anggota',    'PagesController@search_member');
     Route::post('/home/latihan/{id}',   'ItaskCrudController@store_task');
 
     // Route dark mode / light mode
     Route::get('/home/setlightmode',    'themeController@lightmode');
     Route::get('/home/setdarkmode',     'themeController@darkmode');
 
+    Route::get('/example/featured.html/{id}', 'PagesController@examplefeatured');
+
     // See Profile
     Route::get('/home/anggota/{id}', 'profileController@individual');
-
+    Route::get('/home/anggota/{id}/uploaded', 'profileController@uploadedfile');
     // Profile
 
     // Leaderboard
-    Route::get('/home/leaderboard', 'pagesController@leaderboard');
+    Route::get('/home/leaderboard', 'PagesController@leaderboard');
 });
 
 Route::middleware(['auth', 'cekpengurus'])->group(function(){
