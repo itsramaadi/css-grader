@@ -10,8 +10,14 @@ use App\User;
 
 class profileController extends Controller
 {
-    public function individual($id){
-        $profile = User::find($id);
+
+    /**
+     * Show the general page of an user
+     * @param $id
+     * @return \Illuminate\Contracts\View\Factory|\Illuminate\View\View
+     */
+    public function individual($id)
+    {
         $getscore = Submission::where('user_id', $id)->where('status', true)->get();
         $score = 0;
         $done = 0;
@@ -20,16 +26,21 @@ class profileController extends Controller
                 $done++;
         }
         return view('profile.individual')->with([
-            'profile'   => $profile,
+            'profile'   => User::find($id),
             'score'     => $score,
             'sub_done'  => $done,
             ]);
     }
 
-    public function uploadedfile($id){
-        $profile = User::find($id);
+    /**
+     * Show the uploaded file page
+     * @param $id
+     * @return \Illuminate\Contracts\View\Factory|\Illuminate\View\View
+     */
+    public function uploadedfile($id)
+    {
         return view('profile.uploadedfile')->with([
-            'profile' => $profile
+            'profile' => User::find($id)
         ]);
     }
 }

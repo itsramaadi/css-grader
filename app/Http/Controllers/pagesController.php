@@ -22,7 +22,8 @@ class pagesController extends Controller
      *  Display the edit profile page
      * @return \Illuminate\Contracts\View\Factory|\Illuminate\View\View
     */
-    public function edit_profile(){
+    public function edit_profile()
+    {
         return view('profile.edit_profile');
     }
 
@@ -30,13 +31,16 @@ class pagesController extends Controller
      * @param Request $request
      * @return \Illuminate\Http\RedirectResponse|\Illuminate\Routing\Redirector
      */
-    public function edit_profile_put(Request $request){
-        $valid = $request->validate([
+    public function edit_profile_put(Request $request)
+    {
+        $valid = $request->validate(
+            [
             'name'  => 'max:255',
             'class' => 'max:9',
             'avatar' => 'mimetypes:image/jpeg,image/png,image/gif|max:7999',
             'absent' => 'min:1'
-        ]);
+            ]
+        );
 
         $filefinal = str_replace(' ', '', Auth::user()->name) . "." . $request->file('avatar')->getClientOriginalExtension();
 

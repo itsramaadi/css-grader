@@ -6,7 +6,13 @@ use Illuminate\Database\Eloquent\Model;
 
 class Course extends Model
 {
-    public function submissions(){
+
+    /**
+     * HasMany Relations (Submission)
+     * @return \Illuminate\Database\Eloquent\Relations\HasMany
+     */
+    public function submissions()
+    {
         return $this->hasMany('App\Submission');
     }
 }

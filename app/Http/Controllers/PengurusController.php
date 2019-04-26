@@ -10,38 +10,63 @@ use App\User;
 
 class PengurusController extends Controller
 {
-    public function homep(){
-        $notverified = User::where('role_lvl', 0)->count();
-        $totaluser = User::all()->count();
-        $alltask = Course::all()->count();
-        $notchecked = Submission::where('status', false)->count();
+
+    /**
+     * Show the homepage of administrator
+     * @return \Illuminate\Contracts\View\Factory|\Illuminate\View\View
+     */
+    public function homep()
+    {
         return view('pengurus.home')->with([
-            'notverified' => $notverified,
-            'totaluser' => $totaluser,
-            'alltask' => $alltask,
-            'notchecked' => $notchecked
+            'notverified' => User::where('role_lvl', 0)->count(),
+            'totaluser' => User::all()->count(),
+            'alltask' => Course::all()->count(),
+            'notchecked' => Submission::where('status', false)->count()
         ]);
     }
 
-    public function rekap_poin(){
-        $leaderboard = Submission::selectRaw('user_id, sum(score_achieved) as pts')->groupBy('user_id')->orderBy('pts', 'desc')->get();
-        $user = User::orderBy('id', 'asc')->get();
-        return view('pengurus.rekap_poin')->with('leaderboard', $leaderboard)->with('user', $user);;
+
+    /**
+     * Show the point tally page (same as leaderboard, but with added content + excel export)
+     * @return \Illuminate\Contracts\View\Factory|\Illuminate\View\View
+     */
+    public function rekap_poin()
+    {
+        return view('pengurus.rekap_poin')->with(
+            [
+                'leaderboard'   => Submission::selectRaw('user_id, sum(score_achieved) as pts')->groupBy('user_id')->orderBy('pts', 'desc')->get(),
+                'user'          => User::orderBy('id', 'asc')->get()
+            ]
+        );
     }
 
-    public function arsip_latihan(){
-        $course_archived = Course::where('course_archived', true)->orderBy('created_at', 'asc')->get();
-        return view('pengurus.arsip_latihan')->with('course_archived', $course_archived);
+    /**
+     * Show the exercise archive page
+     * @return \Illuminate\Contracts\View\Factory|\Illuminate\View\View
+     */
+    public function arsip_latihan()
+    {
+        return view('pengurus.arsip_latihan')->with('course_archived', Course::where('course_archived', true)->orderBy('created_at', 'asc')->get());
     }
 
-    public function arsip_submisi(){
-        $submission_arc = Submission::where('status', true)->orderBy('course_id', 'asc')->orderBy('created_at', 'asc')->get();
+    /**
+     * Show the submission archive
+     * @return \Illuminate\Contracts\View\Factory|\Illuminate\View\View
+     */
+    public function arsip_submisi()
+    {
         return view('pengurus.arsip_submisi')->with([
-            'submission' => $submission_arc,
+            'submission' => Submission::where('status', true)->orderBy('course_id', 'asc')->orderBy('created_at', 'asc')->get(),
         ]);
     }
 
-    public function batal_arsip_latihan($id){
+    /**
+     * Cancel the archival of an excercise
+     * @param $id
+     * @return \Illuminate\Http\RedirectResponse|\Illuminate\Routing\Redirector
+     */
+    public function batal_arsip_latihan($id)
+    {
         Course::where('id',$id)->update([
             'course_archived' => false
         ]);
