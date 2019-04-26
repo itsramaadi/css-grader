@@ -17,7 +17,7 @@ class ItaskCrudController extends Controller
     public function store_task(Request $request, $id){
         // Validation
         $validated = $request->validate(
-            ['course_file' => 'required|mimetypes:text/htm,limage/jpeg,image/png|max:2000']
+            ['course_file' => 'required|mimetypes:text/html,image/jpeg,image/png|max:2000']
         );
         $filefinal = str_replace(' ', '', $request->file('course_file')->getClientOriginalName())."-".uniqid()."-uploadby-".str_replace(' ', '', Auth::user()->name).".".$request->file('course_file')->getClientOriginalExtension();
 
@@ -30,7 +30,7 @@ class ItaskCrudController extends Controller
         $submission->reviewer_id = 0;
         $submission->save();
         $request->file('course_file')->storeAs('public/submittedcourse', $filefinal);
-        return Redirect('/home')->with('statuss', 'Tugas anda sudah diupload!');
+        return Redirect('/home')->with('status', 'Tugas anda sudah diupload!');
 
     }
 }
