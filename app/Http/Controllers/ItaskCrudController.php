@@ -19,8 +19,8 @@ class ItaskCrudController extends Controller
         $validated = $request->validate(
             ['course_file' => 'required|mimetypes:text/html,image/jpeg,image/png|max:2000']
         );
-        $filefinal = str_replace(' ', '', $request->file('course_file')->getClientOriginalName())."-".uniqid()."-uploadby-".str_replace(' ', '', Auth::user()->name).".".$request->file('course_file')->getClientOriginalExtension();
 
+        $filefinal = str_replace(' ', '', $validated['course_file']->getClientOriginalName())."-".uniqid()."-uploadby-".str_replace(' ', '', Auth::user()->name).".".$validated['course_file']->getClientOriginalExtension();
         $submission = new Submission;
         $submission->course_id = intval($id);
         $submission->user_id = Auth::user()->id;

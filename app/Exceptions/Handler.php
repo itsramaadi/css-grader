@@ -46,6 +46,9 @@ class Handler extends ExceptionHandler
      */
     public function render($request, Exception $exception)
     {
+        if ($exception instanceof \Illuminate\Http\Exceptions\PostTooLargeException) {
+            redirect()->back()->withErrors("File yang kamu upload kegedean, lho!", 'addNote');
+        }
         return parent::render($request, $exception);
     }
 }

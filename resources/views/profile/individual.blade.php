@@ -1,14 +1,11 @@
 @extends('layouts.app')
 
 @section('content')
-<div class="container">
-
-
     <div class="header">
         @if ($profile->cover_img == "/img/mountains.png")
             <img src="{{asset('/img/mountains.png')}}" class="header-img-top" alt="sepertinya {{$profile->name}} belum mengganti sampul gambarnya">
         @else
-            
+
         @endif
         <div class="container-fluid">
 
@@ -19,10 +16,10 @@
                         <div class="avatar avatar-xxl header-avatar-top">
                             @if ($profile->avatar_url == "/img/noavatar.png")
                                 <img src="{{asset($profile->avatar_url)}}" alt="..."
-                                class="avatar-img rounded-circle border border-4 border-card">
+                                     class="avatar-img rounded-circle border border-4 border-card">
                             @else
-                            <img src="{{asset('/storage/useravatar/'.$profile->avatar_url)}}" alt="..."
-                            class="avatar-img rounded-circle border border-4 border-card">
+                                <img src="{{asset('/storage/useravatar/'.$profile->avatar_url)}}" alt="..."
+                                     class="avatar-img rounded-circle border border-4 border-card" onclick="$('#modalProfil').modal({show:true});">
                             @endif
                         </div>
 
@@ -31,18 +28,18 @@
 
                         <h6 class="header-pretitle">
                             @if ($profile->role_lvl == 2)
-                            PENGURUS
+                                PENGURUS
                             @else
-                            ANGGOTA
+                                ANGGOTA
                             @endif
                         </h6>
 
                         <h1 class="header-title">
                             {{$profile->name}}
                             @if ($profile->role_lvl == 2)
-                            <i class="fas fa-check-circle" style="color: #00d97e"></i>
+                                <i class="fas fa-check-circle" style="color: #00d97e"></i>
                             @else
-                            <i class="fas fa-check-circle" style="color: #6e84a3"></i>
+                                <i class="fas fa-check-circle" style="color: #6e84a3"></i>
                             @endif
                         </h1>
 
@@ -58,7 +55,7 @@
                                 </a>
                             </li>
                             <li class="nav-item">
-                            <a href="/home/anggota/{{$profile->id}}/uploaded" class="nav-link">
+                                <a href="/home/anggota/{{$profile->id}}/uploaded" class="nav-link">
                                     File di upload
                                 </a>
                             </li>
@@ -68,7 +65,7 @@
             </div>
         </div>
     </div>
-
+<div class="container">
     <div class="card-deck mb-3">
         <div class="card">
             <div class="card-body">
@@ -124,8 +121,32 @@
     </div>
 
 
+</div>
+    <!-- Modal -->
+    <div class="modal fade" id="modalProfil" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+        <div class="modal-dialog" role="document">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title" id="exampleModalLabel">Foto Profil</h5>
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                        <span aria-hidden="true">&times;</span>
+                    </button>
+                </div>
+                <div class="modal-body">
+                    <div class="d-flex justify-content-center">
+                        @if ($profile->avatar_url == "/img/noavatar.png")
+                            <img width="50%" height="50%" src="{{asset($profile->avatar_url)}}" alt="...">
+                        @else
+                                <img width="50%" height="50%" src="{{asset('/storage/useravatar/'.$profile->avatar_url)}}" alt="...">
+                            <br>
+                            <a class="btn btn-block btn-primary" href="{{asset('/storage/useravatar/'.$profile->avatar_url)}}" target="_blank">Klik untuk perbesar gambar!</a>
+                        @endif
+                    </div>
 
+                </div>
 
-
+            </div>
+        </div>
+    </div>
 </div>
 @endsection

@@ -55,9 +55,10 @@ class PengurusController extends Controller
      */
     public function arsip_submisi()
     {
-        return view('pengurus.arsip_submisi')->with([
-            'submission' => Submission::where('status', true)->orderBy('course_id', 'asc')->orderBy('created_at', 'asc')->get(),
-        ]);
+//        return view('pengurus.arsip_submisi')->with([
+//            'submission' => Submission::where('status', true)->orderBy('course_id', 'asc')->orderBy('created_at', 'asc')->get(),
+//        ]);
+        return Submission::where('status', true)->groupBy('course_id')->orderBy('course_id', 'asc')->orderBy('created_at', 'asc')->get();
     }
 
     /**

@@ -99,6 +99,20 @@
                         </label>
                     </div>
 
+                    <div class="form-group">
+                        <label id="form-cover">Homepage</label>
+                        <p>Ketentuan Homepage:</p>
+                        <ol>
+                            <li>Ukuran maksimal 8MB</li>
+                            <li>Berformat: HTML</li>
+                            <li>Dilarang memasukkan script gak jelas</li>
+                            <li>Dilarang masukin backdoor (poin awto negatif)</li>
+                        </ol>
+                        <label for="" class="btn btn-file btn-primary">
+                            <i class="fas fa-upload"></i> Pilih sampul<input accept=".html" type="file" name="homepage" id="form-cover">
+                        </label>
+                    </div>
+
                     <button type="submit" class="btn btn-success">Selesai</button>
                 </form>
 

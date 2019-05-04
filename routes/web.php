@@ -22,7 +22,7 @@ Route::get('/home', 'HomeController@index')->name('home');
 Route::middleware(['auth', 'sudahjadimember'])->group(function(){
 
     Route::get('/gdrive', 'PagesController@gdrivefol');
-
+    Route::get('/bbt', 'PagesController@belumngumpul');
     Route::get('/home/review/{id}',     'LatihanCrudController@uvreview');
     Route::get('/home/edit-profile', 'PagesController@edit_profile');
 

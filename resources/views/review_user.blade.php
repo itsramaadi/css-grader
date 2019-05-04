@@ -23,7 +23,7 @@
                     <h3>Tugas kamu sudah diperiksa!</h3>
                     <p class="text-muted">
                         Pemeriksa: {{$reviewer->name}} <br>
-                        Perolehan skor: {{$submission->score_achieved}}
+                        Perolehan skor: {{$submission->score_achieved}} / {{$submission->courses->max_score}}
                     </p>
                     <hr>
                     <h3>Catatan:</h3>

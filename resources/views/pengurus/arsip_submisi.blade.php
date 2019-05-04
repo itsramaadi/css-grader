@@ -35,7 +35,7 @@
                                             <td>{{$loop->iteration}}</td>
                                             <td>{{$sb->courses->course_name}}</td>
                                             <td>{{$sb->users->name}}</td>
-                                            <td>{{$sb->created_at}}</td>
+                                            <td>{{$sb->created_at->toDayDateTimeString()}}</td>
                                             <td>{{$sb->score_achieved}}</td>
                                             <td>
                                               <a href="/pengurus/review/{{$sb->id}}" class="btn btn-primary">Edit nilai</a>

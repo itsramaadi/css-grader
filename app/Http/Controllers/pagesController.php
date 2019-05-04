@@ -35,14 +35,17 @@ class pagesController extends Controller
     {
         $valid = $request->validate(
             [
-            'name'  => 'max:255',
-            'class' => 'max:9',
-            'avatar' => 'mimetypes:image/jpeg,image/png,image/gif|max:7999',
-            'absent' => 'min:1'
+                'name'          => 'max:255',
+                'class'         => 'max:9',
+                'avatar'        => 'mimetypes:image/jpeg,image/png,image/gif|max:7999',
+                'cover'         => 'mimetypes:image/jpeg,image/png,image/gif|max:7999',
+                'homepage'      => 'mimetypes:text/html',
+                'absent'        => 'min:1'
             ]
         );
 
-        $filefinal = str_replace(' ', '', Auth::user()->name) . "." . $request->file('avatar')->getClientOriginalExtension();
+        $avatar_img_url = str_replace(' ', '', Auth::user()->name) . "." . $request->file('avatar')->getClientOriginalExtension();
+        $cover_img_url  = str_replace(' ', '', Auth::user()->name) . "." . $request->file('avatar')->getClientOriginalExtension();
 
         if(Auth::user()->avatar_url !== '/img/noavatar.png')
         {
@@ -54,12 +57,12 @@ class pagesController extends Controller
                 'class' => $valid['class'],
                 'name'  => $valid['name'],
                 'css_number' => intval($valid['absent']),
-                'avatar_url' => $filefinal,
+                'avatar_url' => $avatar_img_url,
             ]
         );
 
         // Store the file
-        $request->file('avatar')->storeAs('public/useravatar', $filefinal);
+        $request->file('avatar')->storeAs('public/useravatar', $avatar_img_url);
         return redirect('/home')->with('status', '<b>Sukses!</b> Profil sudah diedit');
 
     }
@@ -113,4 +116,7 @@ class pagesController extends Controller
        return view('gdrive');
     }
 
+    public function belumngumpul(){
+      return User::all();
+    }
 }
